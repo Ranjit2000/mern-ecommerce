@@ -1,12 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+import { ProtectedRoute, AdminRoute } from './components/ProtectedRoute'
 
-// User Pages
+// Public Pages
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ProductList from './pages/ProductList'
 import ProductDetail from './pages/ProductDetail'
+
+// User Pages
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import MyOrders from './pages/MyOrders'
@@ -24,24 +27,80 @@ function App() {
       <Layout>
         <Routes>
 
-          {/* Public Routes */}
+          {/* Public Routes - Anyone can access */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:id" element={<ProductDetail />} />
 
-          {/* User Routes */}
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/orders" element={<MyOrders />} />
-          <Route path="/order-success/:id" element={<OrderSuccess />} />
+          {/* Protected Routes - Must be logged in */}
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <MyOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-success/:id"
+            element={
+              <ProtectedRoute>
+                <OrderSuccess />
+              </ProtectedRoute>
+            }
+          />
 
-          {/* Admin Routes */}
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/products" element={<AdminProducts />} />
-          <Route path="/admin/orders" element={<AdminOrders />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
+          {/* Admin Routes - Must be admin */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <AdminRoute>
+                <AdminProducts />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <AdminRoute>
+                <AdminOrders />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <AdminUsers />
+              </AdminRoute>
+            }
+          />
 
         </Routes>
       </Layout>

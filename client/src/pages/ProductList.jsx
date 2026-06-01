@@ -11,6 +11,7 @@ const categories = [
   'Home',
   'Sports',
   'Beauty',
+  'Food',
 ]
 
 const ProductList = () => {

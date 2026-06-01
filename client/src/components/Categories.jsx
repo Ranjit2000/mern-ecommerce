@@ -7,6 +7,7 @@ const categories = [
   { name: 'Home', icon: '🏠', color: 'bg-red-100 text-red-600' },
   { name: 'Sports', icon: '⚽', color: 'bg-purple-100 text-purple-600' },
   { name: 'Beauty', icon: '💄', color: 'bg-pink-100 text-pink-600' },
+  { name: 'Food', icon: '🍟', color: 'bg-orange-100 text-orange-600' },
 ]
 
 const Categories = () => {

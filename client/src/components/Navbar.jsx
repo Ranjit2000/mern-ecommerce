@@ -2,12 +2,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import { useTheme } from '../context/ThemeContext'
+import { useWishlist } from '../context/WishlistContext'
 
 const Navbar = () => {
   const { user, logout } = useAuth()
   const { cartCount } = useCart()
   const { darkMode, toggleDarkMode } = useTheme()
   const navigate = useNavigate()
+  const { wishlistCount } = useWishlist()
 
   const handleLogout = () => {
     logout()
@@ -28,6 +30,20 @@ const Navbar = () => {
           <Link to="/products" className="hover:text-blue-200 dark:hover:text-gray-300 transition font-medium">
             Products
           </Link>
+
+          {user && (
+            <Link
+              to="/wishlist"
+              className="relative hover:text-blue-200 dark:hover:text-gray-300 transition font-medium"
+            >
+              ❤️ Wishlist
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+          )}
 
           {/* Cart */}
           <Link to="/cart" className="relative hover:text-blue-200 dark:hover:text-gray-300 transition font-medium">

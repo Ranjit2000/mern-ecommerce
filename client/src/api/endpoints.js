@@ -33,3 +33,9 @@ export const deleteReview = (productId, reviewId) => API.delete(`/products/${pro
 
 // Analytics
 export const getAnalytics = () => API.get('/analytics')
+
+// Wishlist
+export const getWishlist = () => API.get('/wishlist')
+export const addToWishlist = (productId) => API.post('/wishlist', { productId })
+export const removeFromWishlist = (productId) => API.delete(`/wishlist/${productId}`)
+export const clearWishlist = () => API.delete('/wishlist/clear')

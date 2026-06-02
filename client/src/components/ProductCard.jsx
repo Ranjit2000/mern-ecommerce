@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import WishlistButton from './WishlistButton'
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart()
@@ -7,13 +8,21 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-xl transition overflow-hidden">
 
-      <Link to={`/products/${product._id}`}>
-        <img
-          src={product.images?.[0] || 'https://via.placeholder.com/300'}
-          alt={product.name}
-          className="w-full h-48 object-cover hover:scale-105 transition duration-300"
-        />
-      </Link>
+      {/* Image with Wishlist Button */}
+      <div className="relative">
+        <Link to={`/products/${product._id}`}>
+          <img
+            src={product.images?.[0] || 'https://via.placeholder.com/300'}
+            alt={product.name}
+            className="w-full h-48 object-cover hover:scale-105 transition duration-300"
+          />
+        </Link>
+
+        {/* Wishlist Button on image */}
+        <div className="absolute top-2 right-2 bg-white dark:bg-gray-800 rounded-full p-1 shadow-md">
+          <WishlistButton productId={product._id} />
+        </div>
+      </div>
 
       <div className="p-4">
 

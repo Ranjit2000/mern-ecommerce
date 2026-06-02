@@ -19,6 +19,14 @@ export const getAllOrders = () => API.get('/orders')
 export const updateOrderToDelivered = (id) => API.put(`/orders/${id}/deliver`)
 export const updateOrderToPaid = (id) => API.put(`/orders/${id}/pay`)
 
+
 // Users - Admin
 export const getAllUsers = () => API.get('/users')
 export const deleteUser = (id) => API.delete(`/users/${id}`)
+
+// Reviews
+export const getReviews = (productId) => API.get(`/products/${productId}/reviews`)
+
+export const addReview = (productId, data) => API.post(`/products/${productId}/reviews`, data)
+
+export const deleteReview = (productId, reviewId) => API.delete(`/products/${productId}/reviews/${reviewId}`)

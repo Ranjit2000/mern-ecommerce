@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { getProductById } from '../api/endpoints'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
+import Reviews from '../components/Reviews'
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -46,7 +47,7 @@ const ProductDetail = () => {
   // Loading State
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen dark:bg-gray-800">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     )
@@ -55,7 +56,7 @@ const ProductDetail = () => {
   // Error State
   if (error) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen gap-4">
+      <div className="flex flex-col justify-center items-center min-h-screen gap-4 dark:bg-gray-800">
         <p className="text-red-500 text-xl">{error}</p>
         <button
           onClick={() => navigate('/products')}
@@ -82,13 +83,11 @@ const ProductDetail = () => {
 
         {/* Left - Images */}
         <div>
+
           {/* Main Image */}
-          <div className="bg-gray-100 rounded-xl overflow-hidden mb-4">
+          <div className="bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-4">
             <img
-              src={
-                product.images?.[selectedImage] ||
-                'https://via.placeholder.com/500'
-              }
+              src={product.images?.[selectedImage] || 'https://via.placeholder.com/500'}
               alt={product.name}
               className="w-full h-96 object-cover"
             />
@@ -123,7 +122,7 @@ const ProductDetail = () => {
           </p>
 
           {/* Name */}
-          <h1 className="text-3xl font-bold text-gray-800 mb-3">
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-3">
             {product.name}
           </h1>
 
@@ -143,7 +142,7 @@ const ProductDetail = () => {
                 </span>
               ))}
             </div>
-            <span className="text-gray-500 text-sm">
+            <span className="text-gray-500 dark:text-gray-400 text-sm">
               {product.rating} ({product.numReviews} reviews)
             </span>
           </div>
@@ -167,34 +166,34 @@ const ProductDetail = () => {
           </div>
 
           {/* Description */}
-          <p className="text-gray-600 leading-relaxed mb-6">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
             {product.description}
           </p>
 
           {/* Quantity Selector */}
           {product.stock > 0 && (
             <div className="flex items-center gap-3 mb-6">
-              <span className="font-medium text-gray-700">Quantity:</span>
-              <div className="flex items-center border border-gray-300 rounded-lg">
+              <span className="font-medium text-gray-700 dark:text-gray-300">
+                Quantity:
+              </span>
+              <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg">
                 <button
                   onClick={() => setQty((prev) => Math.max(1, prev - 1))}
-                  className="px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-l-lg transition"
+                  className="px-3 py-2 text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 rounded-l-lg transition"
                 >
                   −
                 </button>
-                <span className="px-4 py-2 font-semibold border-x border-gray-300">
+                <span className="px-4 py-2 font-semibold border-x border-gray-300 dark:border-gray-600 dark:text-white">
                   {qty}
                 </span>
                 <button
-                  onClick={() =>
-                    setQty((prev) => Math.min(product.stock, prev + 1))
-                  }
-                  className="px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-r-lg transition"
+                  onClick={() => setQty((prev) => Math.min(product.stock, prev + 1))}
+                  className="px-3 py-2 text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 rounded-r-lg transition"
                 >
                   +
                 </button>
               </div>
-              <span className="text-gray-400 text-sm">
+              <span className="text-gray-400 dark:text-gray-400 text-sm">
                 Max {product.stock}
               </span>
             </div>
@@ -224,22 +223,27 @@ const ProductDetail = () => {
           </div>
 
           {/* Extra Info */}
-          <div className="border-t border-gray-200 pt-4 space-y-2">
-            <div className="flex gap-2 text-sm text-gray-600">
+          <div className="border-t border-gray-200 dark:border-gray-600 pt-4 space-y-2">
+            <div className="flex gap-2 text-sm text-gray-600 dark:text-gray-300">
               <span>🚚</span>
               <span>Free delivery on orders above ₹500</span>
             </div>
-            <div className="flex gap-2 text-sm text-gray-600">
+            <div className="flex gap-2 text-sm text-gray-600 dark:text-gray-300">
               <span>↩️</span>
               <span>Easy 7 day returns</span>
             </div>
-            <div className="flex gap-2 text-sm text-gray-600">
+            <div className="flex gap-2 text-sm text-gray-600 dark:text-gray-300">
               <span>✅</span>
               <span>100% genuine products</span>
             </div>
           </div>
 
         </div>
+      </div>
+
+      {/* Reviews Section */}
+      <div className="border-t border-gray-200 dark:border-gray-600 mt-12 pt-8">
+        <Reviews productId={id} />
       </div>
 
     </div>

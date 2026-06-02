@@ -30,3 +30,6 @@ export const getReviews = (productId) => API.get(`/products/${productId}/reviews
 export const addReview = (productId, data) => API.post(`/products/${productId}/reviews`, data)
 
 export const deleteReview = (productId, reviewId) => API.delete(`/products/${productId}/reviews/${reviewId}`)
+
+// Analytics
+export const getAnalytics = () => API.get('/analytics')

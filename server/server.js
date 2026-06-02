@@ -5,16 +5,26 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import userRoutes from './routes/userRoutes.js'
 
 dotenv.config();
-connectDB(); 
+connectDB();
 
 const app = express();
-app.use(cors());
+
+// CORS Fix
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}));
+
 app.use(express.json());
+
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/users', userRoutes)
 
 app.get('/', (req, res) => {
   res.send('API is running...');

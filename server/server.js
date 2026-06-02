@@ -7,6 +7,7 @@ import productRoutes from './routes/productRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -27,6 +28,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/products', reviewRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes)
+app.use('/api/analytics', analyticsRoutes)
 
 app.get('/', (req, res) => {
   res.send('API is running...');

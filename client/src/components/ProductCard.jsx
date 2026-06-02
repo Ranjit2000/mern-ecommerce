@@ -5,9 +5,8 @@ const ProductCard = ({ product }) => {
   const { addToCart } = useCart()
 
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden">
+    <div className="bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-xl transition overflow-hidden">
 
-      {/* Product Image */}
       <Link to={`/products/${product._id}`}>
         <img
           src={product.images?.[0] || 'https://via.placeholder.com/300'}
@@ -16,48 +15,38 @@ const ProductCard = ({ product }) => {
         />
       </Link>
 
-      {/* Product Info */}
       <div className="p-4">
 
-        {/* Name */}
         <Link to={`/products/${product._id}`}>
-          <h3 className="font-semibold text-gray-800 mb-1 hover:text-blue-600 truncate">
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-1 hover:text-blue-600 truncate">
             {product.name}
           </h3>
         </Link>
 
-        {/* Category */}
-        <p className="text-gray-400 text-xs mb-2 uppercase tracking-wide">
+        <p className="text-gray-400 dark:text-gray-300 text-xs mb-2 uppercase tracking-wide">
           {product.category}
         </p>
 
-        {/* Rating */}
         <div className="flex items-center gap-1 mb-3">
           {[1, 2, 3, 4, 5].map((star) => (
             <span
               key={star}
-              className={
-                star <= Math.round(product.rating)
-                  ? 'text-yellow-400'
-                  : 'text-gray-300'
-              }
+              className={star <= Math.round(product.rating) ? 'text-yellow-400' : 'text-gray-300'}
             >
               ★
             </span>
           ))}
-          <span className="text-xs text-gray-500 ml-1">
+          <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
             ({product.numReviews || 0})
           </span>
         </div>
 
-        {/* Stock */}
         <p className={`text-xs mb-3 font-medium ${
           product.stock > 0 ? 'text-green-600' : 'text-red-500'
         }`}>
           {product.stock > 0 ? `In Stock (${product.stock})` : 'Out of Stock'}
         </p>
 
-        {/* Price & Button */}
         <div className="flex items-center justify-between">
           <span className="text-blue-600 font-bold text-lg">
             ₹{product.price.toLocaleString()}

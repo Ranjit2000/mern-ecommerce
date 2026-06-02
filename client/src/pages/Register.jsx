@@ -13,7 +13,6 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   })
-
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -25,15 +24,12 @@ const Register = () => {
     e.preventDefault()
     setError('')
 
-    // Validation
     if (!formData.name || !formData.email || !formData.password) {
       return setError('Please fill in all fields')
     }
-
     if (formData.password !== formData.confirmPassword) {
       return setError('Passwords do not match')
     }
-
     if (formData.password.length < 6) {
       return setError('Password must be at least 6 characters')
     }
@@ -55,30 +51,26 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center px-4 transition-colors duration-300">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
 
-        {/* Header */}
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-2">
           Create Account
         </h2>
-        <p className="text-center text-gray-500 mb-6">
+        <p className="text-center text-gray-500 dark:text-gray-400 mb-6">
           Join us today, it's free!
         </p>
 
-        {/* Error Message */}
         {error && (
           <div className="bg-red-100 text-red-700 px-4 py-3 rounded mb-4 text-sm">
             {error}
           </div>
         )}
 
-        {/* Form */}
         <div className="space-y-4">
 
-          {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Full Name
             </label>
             <input
@@ -87,13 +79,12 @@ const Register = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="John Doe"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Email Address
             </label>
             <input
@@ -102,13 +93,12 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Password
             </label>
             <input
@@ -117,13 +107,12 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Min 6 characters"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Confirm Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Confirm Password
             </label>
             <input
@@ -132,11 +121,10 @@ const Register = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               placeholder="Re-enter password"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Submit Button */}
           <button
             onClick={handleSubmit}
             disabled={loading}
@@ -147,8 +135,7 @@ const Register = () => {
 
         </div>
 
-        {/* Login Link */}
-        <p className="text-center text-sm text-gray-600 mt-6">
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
           Already have an account?{' '}
           <Link to="/login" className="text-blue-600 font-medium hover:underline">
             Login here

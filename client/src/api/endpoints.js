@@ -43,3 +43,8 @@ export const clearWishlist = () => API.delete('/wishlist/clear')
 // Upload
 export const uploadImage = (formData) => API.post('/upload', formData, {headers: { 'Content-Type': 'multipart/form-data' }})
 export const deleteImage = (public_id) => API.delete('/upload', { data: { public_id } })
+
+// Payment
+export const getRazorpayKey = () => API.get('/payment/key')
+export const createRazorpayOrder = (data) => API.post('/payment/create-order', data)
+export const verifyPayment = (data) => API.post('/payment/verify', data)

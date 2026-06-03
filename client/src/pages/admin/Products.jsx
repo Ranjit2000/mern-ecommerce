@@ -7,6 +7,7 @@ import {
   updateProduct,
   deleteProduct
 } from '../../api/endpoints'
+import ImageUpload from '../../components/ImageUpload'
 
 const AdminProducts = () => {
   const { user } = useAuth()
@@ -52,8 +53,9 @@ const AdminProducts = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleImageChange = (e) => {
-    setFormData({ ...formData, images: [e.target.value] })
+  // Handle image upload from Cloudinary
+  const handleImageUpload = (url, public_id) => {
+    setFormData({ ...formData, images: [url] })
   }
 
   const handleEdit = (product) => {
@@ -122,7 +124,7 @@ const AdminProducts = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
           Manage Products
         </h1>
         <button
@@ -151,15 +153,15 @@ const AdminProducts = () => {
 
       {/* Add/Edit Form */}
       {showForm && (
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
+        <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
             {editProduct ? 'Edit Product' : 'Add New Product'}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Product Name *
               </label>
               <input
@@ -168,19 +170,19 @@ const AdminProducts = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="iPhone 15 Pro"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Category *
               </label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Category</option>
                 <option value="Electronics">Electronics</option>
@@ -194,7 +196,7 @@ const AdminProducts = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Price (₹) *
               </label>
               <input
@@ -203,12 +205,12 @@ const AdminProducts = () => {
                 value={formData.price}
                 onChange={handleChange}
                 placeholder="999"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Stock *
               </label>
               <input
@@ -217,12 +219,12 @@ const AdminProducts = () => {
                 value={formData.stock}
                 onChange={handleChange}
                 placeholder="10"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
             <div className="sm:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Description
               </label>
               <textarea
@@ -231,21 +233,34 @@ const AdminProducts = () => {
                 onChange={handleChange}
                 placeholder="Product description..."
                 rows={3}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
+            {/* Image Upload */}
             <div className="sm:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Image URL
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Product Image
               </label>
-              <input
-                type="text"
-                value={formData.images[0]}
-                onChange={handleImageChange}
-                placeholder="https://example.com/image.jpg"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              <ImageUpload
+                onUpload={handleImageUpload}
+                currentImage={formData.images[0]}
               />
+              {/* Fallback URL input */}
+              <div className="mt-3">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  Or paste image URL directly:
+                </p>
+                <input
+                  type="text"
+                  value={formData.images[0]}
+                  onChange={(e) =>
+                    setFormData({ ...formData, images: [e.target.value] })
+                  }
+                  placeholder="https://example.com/image.jpg"
+                  className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                />
+              </div>
             </div>
 
           </div>
@@ -261,11 +276,11 @@ const AdminProducts = () => {
       )}
 
       {/* Products Table */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-gray-600">
+              <tr className="bg-gray-50 dark:bg-gray-600 text-gray-600 dark:text-gray-300">
                 <th className="text-left px-4 py-3">Product</th>
                 <th className="text-left px-4 py-3">Category</th>
                 <th className="text-left px-4 py-3">Price</th>
@@ -273,9 +288,9 @@ const AdminProducts = () => {
                 <th className="text-left px-4 py-3">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-600">
               {products.map((product) => (
-                <tr key={product._id} className="hover:bg-gray-50">
+                <tr key={product._id} className="hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <img
@@ -283,15 +298,15 @@ const AdminProducts = () => {
                         alt={product.name}
                         className="w-10 h-10 object-cover rounded-lg"
                       />
-                      <span className="font-medium text-gray-800 truncate max-w-[200px]">
+                      <span className="font-medium text-gray-800 dark:text-white truncate max-w-[200px]">
                         {product.name}
                       </span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
                     {product.category}
                   </td>
-                  <td className="px-4 py-3 font-semibold text-gray-800">
+                  <td className="px-4 py-3 font-semibold text-gray-800 dark:text-white">
                     ₹{product.price.toLocaleString()}
                   </td>
                   <td className="px-4 py-3">

@@ -39,3 +39,7 @@ export const getWishlist = () => API.get('/wishlist')
 export const addToWishlist = (productId) => API.post('/wishlist', { productId })
 export const removeFromWishlist = (productId) => API.delete(`/wishlist/${productId}`)
 export const clearWishlist = () => API.delete('/wishlist/clear')
+
+// Upload
+export const uploadImage = (formData) => API.post('/upload', formData, {headers: { 'Content-Type': 'multipart/form-data' }})
+export const deleteImage = (public_id) => API.delete('/upload', { data: { public_id } })

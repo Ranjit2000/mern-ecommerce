@@ -9,7 +9,8 @@ import userRoutes from './routes/userRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import analyticsRoutes from './routes/analyticsRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
-import uploadRoutes from './routes/uploadRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -32,7 +33,8 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/wishlist', wishlistRoutes);
-app.use('/api/upload', uploadRoutes)
+app.use('/api/upload', uploadRoutes);
+app.use('/api/payment', paymentRoutes);
 
 
 app.get('/', (req, res) => {

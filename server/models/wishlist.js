@@ -16,3 +16,4 @@ const wishlistSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model('Wishlist', wishlistSchema);
+// Adding correct file name

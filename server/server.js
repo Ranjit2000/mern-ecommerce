@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import analyticsRoutes from './routes/analyticsRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js'
 
 dotenv.config();
 connectDB();
@@ -31,6 +32,8 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/upload', uploadRoutes)
+
 
 app.get('/', (req, res) => {
   res.send('API is running...');

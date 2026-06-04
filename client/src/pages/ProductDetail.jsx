@@ -200,7 +200,7 @@ const ProductDetail = () => {
             </div>
           )}
 
-          {/* Action Buttons */}
+          {/* Action Buttons - Single Set With Wishlist */}
           <div className="flex gap-3 mb-6">
             <button
               onClick={handleAddToCart}
@@ -221,33 +221,12 @@ const ProductDetail = () => {
             >
               Buy Now
             </button>
-          </div>
-          <div className="flex gap-3 mb-6">
-              <button
-                onClick={handleAddToCart}
-                disabled={product.stock === 0}
-                className={`flex-1 py-3 rounded-lg font-semibold transition ${
-                  addedToCart
-                    ? 'bg-green-500 text-white'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                } disabled:opacity-50 disabled:cursor-not-allowed`}
-              >
-                {addedToCart ? '✓ Added to Cart!' : 'Add to Cart'}
-              </button>
 
-              <button
-                onClick={handleBuyNow}
-                disabled={product.stock === 0}
-                className="flex-1 bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Buy Now
-              </button>
-
-              {/* Wishlist Button */}
-              <div className="flex items-center justify-center w-14 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition">
-                <WishlistButton productId={product._id} />
-              </div>
+            {/* Wishlist Button */}
+            <div className="flex items-center justify-center w-14 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition">
+              <WishlistButton productId={product._id} />
             </div>
+          </div>
 
           {/* Extra Info */}
           <div className="border-t border-gray-200 dark:border-gray-600 pt-4 space-y-2">

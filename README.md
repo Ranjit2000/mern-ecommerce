@@ -171,7 +171,7 @@ Built as a demonstration of full-stack engineering capability, the project integ
 ![Home](client/public/screenshots/home.png)
 
 ### Product Listing
-![Products](client/public/screenshots/products.png)
+![Products](client/public/screenshots/Product.png)
 
 ### Product Detail
 ![Detail](client/public/screenshots/product-detail.png)

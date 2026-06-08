@@ -8,7 +8,7 @@
 [![Backend](https://img.shields.io/badge/Backend-API%20Live-green?style=for-the-badge)](https://mern-ecommerce-backend-qwsw.onrender.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge)](https://github.com/YOUR_USERNAME/mern-ecommerce)
 
-![ShopMERN](client/public/screenshots/home.png)
+![ShopMERN](client/public/screenshots/Home.png)
 
 </div>
 
